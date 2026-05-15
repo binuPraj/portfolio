@@ -1,12 +1,12 @@
 import Navbar from '@/components/Navbar';
-import Certificates from '@/components/Certificates';
 import Footer from '@/components/Footer';
+import Experiences from '@/components/Experiences';
 
-export default function CertificatesPage() {
+export default function ExperiencesPage() {
   return (
     <main>
       <Navbar />
-      <Certificates />
+      <Experiences />
       <Footer />
     </main>
   );

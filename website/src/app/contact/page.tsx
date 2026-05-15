@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { Mail, Linkedin, Github, MapPin } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import styles from './ContactPage.module.css';
@@ -8,19 +9,10 @@ import emailjs from '@emailjs/browser';
 
 export default function ContactPage() {
   const form = useRef<HTMLFormElement>(null);
-  
-  // =========================================================================
-  // EMAILJS CONFIGURATION
 
-  // 1. Log in to https://www.emailjs.com/
-  // 2. Create an account and add an Email Service (e.g., Gmail)
-  // 3. Create an Email Template with variables: {{name}}, {{email}}, {{subject}}, {{message}}
-  // 4. Paste your IDs below:
-  // =========================================================================
-  const SERVICE_ID = "service_vocgy1k";
-  const TEMPLATE_ID = "template_xq59w69";
-  const PUBLIC_KEY = "Y6oMB_oUuvkqvI5aH";
-  // =========================================================================
+  const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '';
+  const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '';
+  const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
 
   const [formData, setFormData] = useState({
     name: '',
@@ -71,22 +63,18 @@ export default function ContactPage() {
           <div className={`${styles.content} animate-fade-in`}>
             <div className={styles.info}>
               <div className={styles.infoItem}>
-                <h3>Email</h3>
+                <h3><Mail size={16} />Email</h3>
                 <p>binupr203@gmail.com</p>
               </div>
               <div className={styles.infoItem}>
-                <h3>Phone</h3>
-                <p>+977-9741808411</p>
-              </div>
-              <div className={styles.infoItem}>
-                <h3>Location</h3>
+                <h3><MapPin size={16} />Location</h3>
                 <p>Bhaktapur, Nepal</p>
               </div>
               <div className={styles.infoItem}>
-                <h3>Socials</h3>
+                <h3><Github size={16} />Socials</h3>
                 <div className={styles.socialLinks}>
-                <a href="https://github.com/binuPraj">GitHub</a>
-              <a href="https://www.linkedin.com/in/binu-prajapati-793290305">LinkedIn</a>
+                <a href="https://github.com/binuPraj"><Github size={16} />GitHub</a>
+              <a href="https://www.linkedin.com/in/binu-prajapati-793290305"><Linkedin size={16} />LinkedIn</a>
                 </div>
               </div>
             </div>
