@@ -1,56 +1,176 @@
 .footer {
-    padding: 4rem 0 3rem;
-    position: relative;
-    text-align: center;
-    color: var(--muted);
-    font-size: 1rem;
-    background: var(--background);
+  background: var(--background-secondary);
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  border-top: 1px solid var(--border);
 }
 
-/* Top decorative border */
-.footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, var(--accent-dim) 20%, var(--accent) 50%, var(--accent-dim) 80%, transparent 100%);
+.topBorder {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--tag-border) 50%, transparent 100%);
 }
 
-/* Decorative symbol */
-.footer::after {
-    content: '◆';
-    position: absolute;
-    top: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 10px;
-    color: var(--accent);
-    background: var(--background);
-    padding: 0 1rem;
+.footer > :global(.container) {
+  padding-top: 4.5rem;
+  padding-bottom: 2.5rem;
 }
 
-.footer p {
-    margin: 0.5rem 0;
-    font-family: 'Cormorant Garamond', serif;
-    letter-spacing: 0.05em;
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr;
+  gap: 3.5rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
 }
 
-.footer p:first-child {
-    font-family: 'Cinzel', serif;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-size: 0.8rem;
-    color: var(--foreground-dim);
+/* Brand */
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
 }
 
-.footer a {
-    color: var(--accent-dim);
-    transition: all 0.3s ease;
+.logoBadgeWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
 }
 
-.footer a:hover {
-    color: var(--accent);
-    text-shadow: 0 0 10px rgba(201, 162, 39, 0.3);
+.logoBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--accent-gradient);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.brandName {
+  font-size: 1.3rem;
+  font-weight: 800;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+}
+
+.brandTagline {
+  font-size: 0.92rem;
+  color: var(--foreground-dim);
+  line-height: 1.65;
+  max-width: 380px;
+}
+
+.statusIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 0.35rem;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--status-green);
+  box-shadow: 0 0 6px var(--status-green);
+}
+
+/* Link Groups */
+.linkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.linkGroupTitle {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.navLinks,
+.connectList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.navLinks a,
+.connectList a {
+  font-size: 0.9rem;
+  color: var(--foreground-dim);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.navLinks a:hover,
+.connectList a:hover {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+/* Bottom */
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.copyright {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.socialIcons {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.socialIcons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--foreground-dim);
+  background: var(--card-bg);
+  transition: all 0.2s ease;
+}
+
+.socialIcons a:hover {
+  color: var(--foreground);
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+  background: var(--card-bg-hover);
+}
+
+@media (max-width: 868px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

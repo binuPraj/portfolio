@@ -1,190 +1,258 @@
-.nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-    transition: all 0.4s ease;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: transparent;
 }
 
 .scrolled {
-    height: 70px;
-    background: var(--navbar-bg);
-    backdrop-filter: blur(12px);
-    box-shadow:
-        0 4px 30px rgba(0, 0, 0, 0.5),
-        0 1px 0 rgba(201, 162, 39, 0.1);
-    border-bottom: 1px solid var(--border);
-}
-
-/* Top decorative line */
-.scrolled::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, var(--accent-dim) 50%, transparent 100%);
+  height: 70px;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--navbar-border);
+  box-shadow: var(--shadow-sm);
 }
 
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-.logo a {
-    font-size: 1.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    font-family: 'Cinzel', serif;
-    text-transform: uppercase;
-    position: relative;
-    padding: 0.5rem 0;
+/* Logo */
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
 }
 
-.logo a::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
-    opacity: 0.5;
+.logoBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--accent-gradient);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  border-radius: 9px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  box-shadow: 0 4px 14px var(--accent-glow);
+  transition: transform 0.25s ease;
 }
 
-.logo span {
-    color: var(--accent);
-    text-shadow: 0 0 20px rgba(201, 162, 39, 0.5);
+.logoLink:hover .logoBadge {
+  transform: scale(1.05) rotate(-2deg);
 }
 
-.links {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+.logoName {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--foreground);
 }
 
-.links a {
-    font-weight: 500;
-    font-size: 0.95rem;
-    color: var(--foreground-dim);
-    font-family: 'Cinzel', serif;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    position: relative;
-    padding: 0.5rem 0;
-    transition: all 0.3s ease;
+.logoDot {
+  color: var(--accent);
 }
 
-.links a::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 1px;
-    background: var(--accent);
-    transition: width 0.3s ease;
+/* Nav Links Island */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.5rem;
+  border-radius: 100px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-sm);
 }
 
-.links a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
-    background: var(--accent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+.navItem {
+  position: relative;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--foreground-dim);
+  padding: 0.45rem 0.95rem;
+  border-radius: 100px;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
 }
 
-.links a:hover {
-    color: var(--accent);
-    text-shadow: 0 0 15px rgba(201, 162, 39, 0.4);
+.navItem:hover {
+  color: var(--foreground);
 }
 
-.links a:hover::before {
-    width: 100%;
+.activeItem {
+  color: var(--foreground);
+  font-weight: 600;
+  background: var(--accent-subtle);
+  border: 1px solid var(--tag-border);
 }
 
-.links a:hover::after {
-    opacity: 1;
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
 }
 
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1.1rem;
+  background: var(--foreground);
+  color: var(--background);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 100px;
+  letter-spacing: -0.01em;
+  transition: all 0.25s ease;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.ctaIcon {
+  transition: transform 0.2s ease;
+}
+
+.ctaBtn:hover .ctaIcon {
+  transform: translate(2px, -2px);
+}
+
+/* Mobile Toggle */
 .mobileToggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 20px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 1001; /* Above mobile menu */
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 36px;
+  height: 36px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  cursor: pointer;
+  padding: 8px 7px;
+  z-index: 1001;
 }
 
 .mobileToggle span {
-    width: 100%;
-    height: 2px;
-    background-color: var(--foreground);
-    transition: all 0.3s ease;
-    transform-origin: left;
+  width: 100%;
+  height: 2px;
+  background-color: var(--foreground);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 2px;
 }
 
 .mobileToggle.open span:nth-child(1) {
-    transform: rotate(45deg);
+  transform: translateY(6px) rotate(45deg);
 }
 
 .mobileToggle.open span:nth-child(2) {
-    opacity: 0;
+  opacity: 0;
 }
 
 .mobileToggle.open span:nth-child(3) {
-    transform: rotate(-45deg);
+  transform: translateY(-6px) rotate(-45deg);
 }
 
-@media (max-width: 768px) {
-    .mobileToggle {
-        display: flex;
-    }
+/* Mobile Drawer */
+.mobileDrawer {
+  display: none;
+}
 
-    .links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 100vw;
-        height: 100vh;
-        background: var(--background);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: right 0.4s ease;
-        z-index: 1000;
-    }
+@media (max-width: 868px) {
+  .navLinks {
+    display: none;
+  }
 
-    .linksOpen {
-        right: 0;
-    }
+  .ctaBtn {
+    display: none;
+  }
 
-    .links a {
-        font-size: 1.5rem;
-    }
+  .mobileToggle {
+    display: flex;
+  }
 
-    .logo a {
-        font-size: 1.25rem;
-    }
+  .mobileDrawer {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 340px;
+    height: 100vh;
+    background: var(--card-bg-solid);
+    border-left: 1px solid var(--border);
+    padding: 90px 2rem 2rem;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+    transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 999;
+  }
+
+  .drawerOpen {
+    right: 0;
+  }
+
+  .mobileLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .mobileNavItem {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--foreground-dim);
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
+
+  .mobileNavItem:hover,
+  .mobileActiveItem {
+    color: var(--foreground);
+    background: var(--accent-subtle);
+  }
+
+  .mobileCtaWrap {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .mobileCtaBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.85rem;
+    background: var(--accent-gradient);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px var(--accent-glow);
+  }
 }

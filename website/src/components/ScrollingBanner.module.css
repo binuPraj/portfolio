@@ -1,103 +1,79 @@
-.bannerContainer {
-    width: 100%;
-    background: #E8B828;
-    /* Hardcoded dark mode yellow constant */
-    color: #111111;
-    /* Hardcoded dark text constant */
-    padding: 0.5rem 0;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    white-space: nowrap;
-    transform: rotate(-2deg) scale(1.05);
-    /* Rotates slightly */
-    z-index: 10;
-    margin-top: -2rem;
-    /* Overlap slightly with hero */
-    margin-bottom: 2rem;
-
+.marqueeSection {
+  width: 100%;
+  padding: 1.5rem 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--background-secondary);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
-.reversed {
-    transform: rotate(2deg) scale(1.05);
+.marqueeContainer {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
 }
 
-.topFixed {
-    position: absolute;
-    top: -12%;
-    left: -20vw;
-    width: 140%;
-    margin: 0;
-    transform: rotate(-30deg);
-    z-index: 2;
-    opacity: 0.85;
+.marqueeTrack {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  width: max-content;
+  animation: scrollInfinite 35s linear infinite;
 }
 
-.topFixedMirror {
-    position: absolute;
-    top: -12%;
-    right: -20vw;
-    left: auto;
-    width: 140%;
-    margin: 0;
-    transform: rotate(30deg);
-    z-index: 2;
+.marqueeTrack:hover {
+  animation-play-state: paused;
 }
 
-.bannerContent {
-    display: flex;
-    width: max-content;
-    animation: scroll 60s linear infinite;
-    /* Doubled duration for slower scroll */
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  white-space: nowrap;
 }
 
-.scrollText {
-    white-space: pre;
-    font-family: 'Cinzel', serif;
-    font-weight: 800;
-    letter-spacing: 0.15rem;
-    font-size: 0.85rem;
+.sparkleDot {
+  color: var(--accent);
+  font-size: 0.8rem;
 }
 
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
+.techName {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--foreground-dim);
+  transition: color 0.25s ease;
+}
 
-    100% {
-        transform: translateX(-50%);
-    }
+.item:hover .techName {
+  color: var(--foreground);
+}
+
+@keyframes scrollInfinite {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @media (max-width: 768px) {
-    .bannerContainer {
-        padding: 0.35rem 0;
-        transform: rotate(-3deg) scale(1.1);
-        margin-top: -1rem;
-        margin-bottom: 2rem;
-    }
+  .marqueeSection {
+    padding: 1rem 0;
+  }
 
-    .topFixed {
-        top: -12%;
-        left: -20vw;
-        width: 140%;
-        transform: rotate(-30deg);
-        margin: 0;
-        padding: 0.25rem 0;
-    }
+  .techName {
+    font-size: 0.85rem;
+  }
 
-    .topFixedMirror {
-        top: -12%;
-        right: -20vw;
-        left: auto;
-        width: 140%;
-        transform: rotate(30deg);
-        margin: 0;
-        padding: 0.25rem 0;
-    }
-
-    .scrollText {
-        font-size: 0.6rem;
-        letter-spacing: 0.1rem;
-    }
+  .marqueeTrack {
+    gap: 1.75rem;
+  }
 }

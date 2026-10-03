@@ -4,8 +4,11 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 
 export const metadata: Metadata = {
-  title: "Binu Prajapati",
-  description: "Final-year Computer Engineering student — AI/ML Enthusiast & Full-Stack Web Developer.",
+  title: "Binu Prajapati — AI/ML & Full-Stack Developer",
+  description: "Portfolio of Binu Prajapati — a final-year Computer Engineering student specializing in AI/ML systems and full-stack web development. Built with React, Next.js, Python, and Django.",
+  keywords: ["Binu Prajapati", "AI/ML Developer", "Full-Stack Developer", "Computer Engineering", "Nepal", "React", "Django", "Python"],
+  authors: [{ name: "Binu Prajapati" }],
+  creator: "Binu Prajapati",
 };
 
 export default function RootLayout({

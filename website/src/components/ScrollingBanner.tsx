@@ -1,23 +1,31 @@
 import styles from './ScrollingBanner.module.css';
 
-interface ScrollingBannerProps {
-  topFixed?: boolean;
-  mirror?: boolean;
-  reversed?: boolean;
-  text?: string;
-}
+const techItems = [
+  'NationalAI Hackathon 2026 Runner-Up',
+  'RECONNECT (Dementia Care AI)',
+  'POLARISAI Controversy Engine',
+  'RentEra P2P Platform',
+  'KU Hackathon AI/ML Winner',
+  'FastAPI & Django',
+  'PyTorch & Whisper',
+  'Multi-Stage Data Pipelines',
+  'PostgreSQL & MongoDB',
+  'InsightFace & PyAnnote',
+  'REST APIs & System Design',
+];
 
-export default function ScrollingBanner({ topFixed = false, mirror = false, reversed = false, text }: ScrollingBannerProps) {
-  const defaultText = "SOFTWARE ENGINEER ✦ CREATIVE THINKER ✦ PROBLEM SOLVER ✦ UI/UX ENTHUSIAST ✦ DIGITAL CREATOR ✦ ";
-  const displayText = text || defaultText;
-  
-  const containerClass = mirror ? styles.topFixedMirror : topFixed ? styles.topFixed : '';
-
+export default function ScrollingBanner() {
   return (
-    <div className={`${styles.bannerContainer} ${containerClass} ${reversed ? styles.reversed : ''}`}>
-      <div className={styles.bannerContent}>
-        <div className={styles.scrollText}>{displayText.repeat(3)}</div>
-        <div className={styles.scrollText}>{displayText.repeat(3)}</div>
+    <div className={styles.marqueeSection} aria-hidden>
+      <div className={styles.marqueeContainer}>
+        <div className={styles.marqueeTrack}>
+          {techItems.concat(techItems).map((tech, index) => (
+            <div key={index} className={styles.item}>
+              <span className={styles.sparkleDot}>✦</span>
+              <span className={styles.techName}>{tech}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
