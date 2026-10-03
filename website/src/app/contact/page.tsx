@@ -1,29 +1,13 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { Mail, Linkedin, Github, MapPin, Send, Check, Copy, Sparkles, MessageSquare } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import styles from './ContactPage.module.css';
-import emailjs from '@emailjs/browser';
 
 export default function ContactPage() {
-  const form = useRef<HTMLFormElement>(null);
   const [copied, setCopied] = useState(false);
-
-  const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '';
-  const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '';
-  const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
-
-  useEffect(() => {
-    if (PUBLIC_KEY) {
-      try {
-        emailjs.init({ publicKey: PUBLIC_KEY });
-      } catch (err) {
-        console.warn('EmailJS initialization warning:', err);
-      }
-    }
-  }, [PUBLIC_KEY]);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -48,55 +32,24 @@ export default function ContactPage() {
     e.preventDefault();
     setStatus('sending');
 
-    const templateParams = {
-      name: formData.name,
-      from_name: formData.name,
-      user_name: formData.name,
-      email: formData.email,
-      from_email: formData.email,
-      user_email: formData.email,
-      reply_to: formData.email,
-      subject: formData.subject,
-      message: formData.message,
-      to_name: 'Binu Prajapati'
-    };
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
 
-    let sent = false;
-
-    // 1. Try Client-side EmailJS
-    if (SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY) {
-      try {
-        await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, { publicKey: PUBLIC_KEY });
-        sent = true;
-      } catch (clientErr) {
-        console.warn('Client-side EmailJS blocked or failed, attempting server route...', clientErr);
+      if (data.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        return;
       }
+    } catch (err) {
+      console.warn('Server API failed:', err);
     }
 
-    // 2. Try Server-side API route (bypasses browser adblockers and CORS restrictions)
-    if (!sent) {
-      try {
-        const res = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
-        if (res.ok) {
-          sent = true;
-        }
-      } catch (serverErr) {
-        console.warn('Server contact API attempt failed:', serverErr);
-      }
-    }
-
-    // 3. If sent successfully
-    if (sent) {
-      setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      return;
-    }
-
-    // 4. If direct APIs failed, fallback to client mailto
+    // Fallback: open mail client
     try {
       window.location.href = `mailto:binupr203@gmail.com?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`From: ${formData.name} (${formData.email})\n\n${formData.message}`)}`;
       setStatus('success');
@@ -106,9 +59,7 @@ export default function ContactPage() {
     }
   };
 
-  const handleMailtoFallback = () => {
-    window.location.href = `mailto:binupr203@gmail.com?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`From: ${formData.name} (${formData.email})\n\n${formData.message}`)}`;
-  };
+
 
   return (
     <main className={styles.main}>
@@ -191,7 +142,7 @@ export default function ContactPage() {
 
             {/* Modern Contact Form */}
             <div className={styles.formCol}>
-              <form ref={form} className={styles.formCard} onSubmit={handleSubmit}>
+              <form className={styles.formCard} onSubmit={handleSubmit}>
                 <h3 className={styles.formTitle}>Send a Message</h3>
                 
                 <div className={styles.inputRow}>
@@ -271,15 +222,15 @@ export default function ContactPage() {
 
                 {status === 'error' && (
                   <div className={styles.errorAlert}>
-                    <p>Something went wrong sending via EmailJS. You can click below to send directly via your mail client or write to binupr203@gmail.com:</p>
+                    <p>Something went wrong. Please write directly to <strong>binupr203@gmail.com</strong> or try again.</p>
                     <button
                       type="button"
-                      onClick={handleMailtoFallback}
+                      onClick={() => window.location.href = `mailto:binupr203@gmail.com?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`From: ${formData.name} (${formData.email})\n\n${formData.message}`)}`}
                       className={styles.copyPillBtn}
                       style={{ marginTop: '0.6rem' }}
                     >
                       <Mail size={14} />
-                      <span>Send with Default Mail Client</span>
+                      <span>Open Mail Client</span>
                     </button>
                   </div>
                 )}
