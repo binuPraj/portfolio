@@ -6,54 +6,54 @@ const skillCategories = [
     title: 'Programming Languages',
     icon: Code2,
     skills: [
-      { name: 'Python', level: 'Advanced', abbr: 'Py' },
-      { name: 'C', level: 'Proficient', abbr: 'C' },
-      { name: 'C++', level: 'Proficient', abbr: 'C++' },
-      { name: 'JavaScript', level: 'Proficient', abbr: 'JS' },
-      { name: 'TypeScript', level: 'Working', abbr: 'TS' },
+      { name: 'Python', abbr: 'Py' },
+      { name: 'C', abbr: 'C' },
+      { name: 'C++', abbr: 'C++' },
+      { name: 'JavaScript', abbr: 'JS' },
+      { name: 'TypeScript', abbr: 'TS' },
     ]
   },
   {
     title: 'Backend Development',
     icon: Server,
     skills: [
-      { name: 'Django / DRF', level: 'Advanced', abbr: 'Dj' },
-      { name: 'FastAPI', level: 'Advanced', abbr: 'FA' },
-      { name: 'Flask', level: 'Proficient', abbr: 'Fl' },
-      { name: 'REST APIs', level: 'Advanced', abbr: 'API' },
+      { name: 'Django / DRF', abbr: 'Dj' },
+      { name: 'FastAPI', abbr: 'FA' },
+      { name: 'Flask', abbr: 'Fl' },
+      { name: 'REST APIs', abbr: 'API' },
     ]
   },
   {
     title: 'AI/ML & Data Pipelines',
     icon: Cpu,
     skills: [
-      { name: 'PyTorch', level: 'Applied', abbr: 'PT' },
-      { name: 'scikit-learn', level: 'Proficient', abbr: 'SK' },
-      { name: 'NLP & LLM APIs', level: 'Applied', abbr: 'NLP' },
-      { name: 'Pandas & NumPy', level: 'Advanced', abbr: 'PD' },
-      { name: 'Audio & Vision (Whisper/InsightFace)', level: 'Applied', abbr: 'AV' },
+      { name: 'PyTorch', abbr: 'PT' },
+      { name: 'scikit-learn', abbr: 'SK' },
+      { name: 'NLP & LLM APIs', abbr: 'NLP' },
+      { name: 'Pandas & NumPy', abbr: 'PD' },
+      { name: 'Audio & Vision (Whisper/InsightFace)', abbr: 'AV' },
     ]
   },
   {
     title: 'Databases & Web',
     icon: Database,
     skills: [
-      { name: 'PostgreSQL', level: 'Proficient', abbr: 'PG' },
-      { name: 'MongoDB', level: 'Proficient', abbr: 'MG' },
-      { name: 'MySQL', level: 'Proficient', abbr: 'MY' },
-      { name: 'SQLite', level: 'Proficient', abbr: 'SQ' },
-      { name: 'HTML5 & CSS3', level: 'Advanced', abbr: 'H5' },
+      { name: 'PostgreSQL', abbr: 'PG' },
+      { name: 'MongoDB', abbr: 'MG' },
+      { name: 'MySQL', abbr: 'MY' },
+      { name: 'SQLite', abbr: 'SQ' },
+      { name: 'HTML5 & CSS3', abbr: 'H5' },
     ]
   },
   {
     title: 'Tools & Technologies',
     icon: Wrench,
     skills: [
-      { name: 'Git & GitHub', level: 'Daily', abbr: 'Git' },
-      { name: 'VS Code', level: 'Daily', abbr: 'VSC' },
-      { name: 'Postman', level: 'Proficient', abbr: 'PM' },
-      { name: 'Jupyter & Colab', level: 'Daily', abbr: 'Jup' },
-      { name: 'LaTeX', level: 'Proficient', abbr: 'Tex' },
+      { name: 'Git & GitHub', abbr: 'Git' },
+      { name: 'VS Code', abbr: 'VSC' },
+      { name: 'Postman', abbr: 'PM' },
+      { name: 'Jupyter & Colab', abbr: 'Jup' },
+      { name: 'LaTeX', abbr: 'Tex' },
     ]
   }
 ];
@@ -90,11 +90,8 @@ export default function Skills() {
                 <div className={styles.skillList}>
                   {category.skills.map((skill) => (
                     <div key={skill.name} className={styles.skillItem}>
-                      <div className={styles.skillLeft}>
-                        <span className={styles.skillAbbr}>{skill.abbr}</span>
-                        <span className={styles.skillName}>{skill.name}</span>
-                      </div>
-                      <span className={styles.skillLevel}>{skill.level}</span>
+                      <span className={styles.skillAbbr}>{skill.abbr}</span>
+                      <span className={styles.skillName}>{skill.name}</span>
                     </div>
                   ))}
                 </div>
